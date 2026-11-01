@@ -1,2 +1,3 @@
-# deadlock-website-preview-2
-Temporary preview of the Deadlock tournament site with full-screen glass navigation. Website files only.
+# Deadlock website preview
+
+Temporary static preview of the tournament landing page. This repository contains website files only. Account services are not configured yet.

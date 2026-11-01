@@ -1,0 +1,10 @@
+/* The site font: Valve Oracle Semibold, from Deadlock. One file covers every weight, so headings and bold text use
+   the same face instead of a faked bold. */
+@font-face {
+  font-family: "Valve Oracle";
+  src: url("../fonts/valveoracle-semibold.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root { font-family: "Valve Oracle", system-ui, sans-serif; }
