@@ -4,43 +4,137 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Deadlock Tournament</title>
-  <meta name="description" content="A friends-only Deadlock tournament: four teams, seven weeks, one double-elimination bracket.">
-  <!-- The site font, then the wireframe: every required element, unstyled. The real design replaces wireframe.css. -->
-  <link rel="preload" href="./fonts/valveoracle-semibold.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="./css/fonts.css?v=6ed8785e0778">
-  <link rel="stylesheet" href="./css/wireframe.css?v=6ed8785e0778">
-  <!-- Pinned modules, no build step. htm imports Preact through this map too, so there's only ever one copy. -->
-  <script type="importmap">
-{
-  "imports": {
-    "preact": "https://esm.sh/preact@10.29.8",
-    "preact/hooks": "https://esm.sh/preact@10.29.8/hooks",
-    "htm/preact": "https://esm.sh/htm@3.1.1/preact?external=preact",
-    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.118.0",
-    "./js/components/layout.js": "./js/components/layout.js?v=6ed8785e0778",
-    "./js/app.js": "./js/app.js?v=6ed8785e0778",
-    "./js/components/block.js": "./js/components/block.js?v=6ed8785e0778",
-    "./js/components/landing-reveal.js": "./js/components/landing-reveal.js?v=6ed8785e0778",
-    "./js/components/navigation.js": "./js/components/navigation.js?v=6ed8785e0778",
-    "./js/config.js": "./js/config.js?v=6ed8785e0778",
-    "./js/lib/event.js": "./js/lib/event.js?v=6ed8785e0778",
-    "./js/lib/router.js": "./js/lib/router.js?v=6ed8785e0778",
-    "./js/lib/supabase.js": "./js/lib/supabase.js?v=6ed8785e0778",
-    "./js/lib/time.js": "./js/lib/time.js?v=6ed8785e0778",
-    "./js/pages/faq.js": "./js/pages/faq.js?v=6ed8785e0778",
-    "./js/pages/home.js": "./js/pages/home.js?v=6ed8785e0778",
-    "./js/pages/login.js": "./js/pages/login.js?v=6ed8785e0778",
-    "./js/pages/not-found.js": "./js/pages/not-found.js?v=6ed8785e0778",
-    "./js/pages/rules.js": "./js/pages/rules.js?v=6ed8785e0778",
-    "./js/pages/wireframe.js": "./js/pages/wireframe.js?v=6ed8785e0778"
-  }
-}
-  </script>
-  <script type="module" src="./js/app.js?v=6ed8785e0778"></script>
-  <meta name="site-version" content="6ed8785e0778">
+  <meta name="description" content="Four teams of six, double elimination, best of 3. Play hard, play fair, and have fun.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app"><p>Deadlock Tournament is loading…</p></div>
-  <noscript><p>This site needs JavaScript turned on.</p></noscript>
+  <header class="hero">
+    <div class="wrap">
+      <h1 id="title">Deadlock Tournament</h1>
+      <p class="format">6v6 · 4 teams · Double elimination · Best of 3 · 3-ban draft</p>
+      <p class="when">Date: <span id="date">TBD</span></p>
+
+      <svg class="lanes" viewBox="0 0 600 170" role="img" aria-label="Lane map: Hidden King and Archmother, three lanes">
+        <path class="lane york" d="M70 85 C 170 25, 430 25, 530 85" />
+        <path class="lane broadway" d="M70 85 L 530 85" />
+        <path class="lane greenwich" d="M70 85 C 170 145, 430 145, 530 85" />
+        <text x="300" y="34" class="lane-name">York</text>
+        <text x="300" y="78" class="lane-name">Broadway</text>
+        <text x="300" y="150" class="lane-name">Greenwich</text>
+        <g class="side king"><path d="M44 52 h52 v44 c0 16 -26 30 -26 30 s-26 -14 -26 -30z" /></g>
+        <g class="side mother"><path d="M504 52 h52 v44 c0 16 -26 30 -26 30 s-26 -14 -26 -30z" /></g>
+        <text x="70" y="148" class="side-name">Hidden King</text>
+        <text x="530" y="148" class="side-name">Archmother</text>
+      </svg>
+
+      <p class="intro">Four teams of six battle through a double-elimination bracket, drafting heroes with a 3-ban format before every game. It's a friendly community event: play hard, play fair, and have fun.</p>
+
+      <nav class="jump" aria-label="Sections">
+        <a href="signup.html" class="primary">Sign up</a>
+        <a href="#bracket">Bracket</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#teams">Teams</a>
+        <a href="#rules">Rules</a>
+        <a href="rulebook.pdf">Full rulebook (PDF)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="glance">
+      <h2>At a glance</h2>
+      <dl class="glance">
+        <div><dt>Teams</dt><dd>4 × 6, plus subs</dd></div>
+        <div><dt>Matches</dt><dd>6v6 Custom Match, 2-2-2 lanes</dd></div>
+        <div><dt>Series</dt><dd>Best of 3. First to two wins.</dd></div>
+        <div><dt>Bracket</dt><dd>Double elim. Lose twice and you're out.</dd></div>
+        <div><dt>Draft</dt><dd>3 bans and 6 picks per team</dd></div>
+        <div><dt>Prize</dt><dd>Discord role and bragging rights</dd></div>
+      </dl>
+    </section>
+
+    <section id="bracket">
+      <h2>Bracket</h2>
+      <p class="lead">Every team gets a second chance. Lose a series and you drop to the lower bracket; lose a second and you're out.</p>
+      <div class="bracket" id="bracket-grid"></div>
+      <p class="champ" id="champion" hidden></p>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <p class="lead">No set start time. Teams book their own games inside a 1-week window per round. All times are Pacific.</p>
+      <ol class="rounds">
+        <li><b>Round 1:</b> both upper semis</li>
+        <li><b>Round 2:</b> upper final and lower round 1</li>
+        <li><b>Round 3:</b> lower final</li>
+        <li><b>Round 4:</b> grand final</li>
+      </ol>
+      <p class="note">One game per day per series, so a Bo3 takes 2 or 3 days. Different series can play at the same time. If a series hasn't booked by day 3 of its window, the organizers pick the time.</p>
+    </section>
+
+    <section id="teams">
+      <h2>Teams</h2>
+      <p class="lead">Four teams of six, plus subs. Make a team or ask to join one on the <a href="signup.html">sign-up page</a>. There's no seeding: an organizer randomly draws the bracket order.</p>
+      <div class="teams" id="team-list"></div>
+    </section>
+
+    <section id="rules">
+      <h2>Rules</h2>
+      <p class="lead">The short version. The <a href="rulebook.pdf">full rulebook</a> has everything.</p>
+
+      <div class="rules">
+        <article>
+          <h3>The draft</h3>
+          <ol class="steps">
+            <li>Coin flip for sides: Hidden King or Archmother.</li>
+            <li>Both teams ban 3 heroes, revealed at the same time.</li>
+            <li>Second coin flip: the winner takes the first pick.</li>
+            <li>Picks go 1, 3, 3, 2, 2, 1. The other team gets the first triple pick and the last pick.</li>
+          </ol>
+          <p>A hero can be on only one team per game. Pick turns have no time limit.</p>
+        </article>
+
+        <article>
+          <h3>Lanes</h3>
+          <p>Right after pick 12, teams talk separately for 2 minutes, then tell the organizer which pair takes York, Broadway and Greenwich. Both lane sheets get revealed at the same moment. Once the game starts, anyone can swap.</p>
+        </article>
+
+        <article>
+          <h3>Match day</h3>
+          <ul>
+            <li><b>Pauses:</b> up to 5 minutes per team, per game.</li>
+            <li><b>Remakes:</b> disconnect or wrong hero in the first 2 minutes restarts with the same draft and lanes.</li>
+            <li><b>Short a player:</b> play 5v6, ask for a bot, or take the forfeit.</li>
+            <li><b>No-shows:</b> 15 minutes of grace, then it's a forfeit.</li>
+            <li><b>Patches:</b> live patch. A hero released mid-event stays banned until the next round.</li>
+            <li><b>Exploits:</b> no deliberate bug abuse.</li>
+          </ul>
+        </article>
+
+        <article>
+          <h3>Rulings</h3>
+          <p>The organizer's call is final, including anything the rulebook doesn't cover. Appeals only happen if both teams agree a ruling is unfair. Not sure about a rule? Ask an organizer before your match.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="organizers">
+      <h2>Organizers</h2>
+      <p class="lead">Henry, Stephan and Miles. If one organizer is playing in a series, another one runs it. Tell an organizer about anything team-specific.</p>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Good luck, have fun!</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="db.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

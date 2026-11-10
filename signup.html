@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up · Deadlock Tournament</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="signup">
+  <header class="hero small">
+    <div class="wrap">
+      <a class="back" href="./">Deadlock Tournament</a>
+      <h1>Sign up</h1>
+      <p class="intro">Sign in with Discord, set your hours, then make a team or ask to join one. Four teams of six. Rosters lock when the bracket starts.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+    <div id="app"><p class="empty">Loading…</p></div>
+  </main>
+
+  <footer class="wrap">
+    <p>Good luck, have fun!</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="config.js"></script>
+  <script src="db.js"></script>
+  <script src="signup.js"></script>
+</body>
+</html>
